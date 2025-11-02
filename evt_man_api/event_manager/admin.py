@@ -9,7 +9,7 @@ admin.site.register(UserProfile, UserprofileAdmin)
 class EventAdmin(admin.ModelAdmin):
     list_display = ('title', 'organizer', 'start_time', 'end_time', 'is_public')
     search_fields = ('title', 'organizer__username', 'location')
-    list_filter = ('is_public', 'start_time')
+    list_filter = ('is_public','title','location','organizer')
 admin.site.register(Event, EventAdmin)    
 class RSVPAdmin(admin.ModelAdmin):
     list_display = ('event', 'user', 'status')
