@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}
+blog list
+{% endblock  %}
+{% block content %}
+{% for b in blog_list %}
+blog : {{b}} 
+{% endfor %}
+{% endblock  %}

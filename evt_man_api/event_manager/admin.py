@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import UserProfile, Event, RSVP, Review
+from .models import UserProfile, Event, RSVP, Review, Post, blog, comment
 # Register your models here.
 
 class UserprofileAdmin(admin.ModelAdmin):
@@ -22,3 +22,9 @@ class ReviewAdmin(admin.ModelAdmin):
     search_fields = ('event__title', 'user__username')
     list_filter = ('rating',)
 admin.site.register(Review, ReviewAdmin)    
+
+admin.site.register(Post)
+class blogAdmin(admin.ModelAdmin):
+    list_display = ('id','title','description','created_at')
+admin.site.register(blog,blogAdmin)
+admin.site.register(comment)

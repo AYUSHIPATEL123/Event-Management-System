@@ -66,4 +66,36 @@ class Review(models.Model):
     def clean(self):
         from django.core.exceptions import ValidationError
         if self.rating < 1 or self.rating > 5:
-            raise ValidationError('Rating must be between 1 and 5.')
+            raise ValidationError('Rating must be between 1 and 5.'
+                                  )
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey
+class Post(models.Model):
+    mapping = models.ForeignKey(Event,on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    description = models.CharField(max_length=500)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.title   
+
+class blog(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.CharField(max_length=500)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.title
+
+class comment(models.Model):
+   
+    name = models.CharField(max_length=50)
+    comment = models.CharField(max_length=300)
+    created_at = models.DateTimeField(auto_now_add=True)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    project_id = models.PositiveIntegerField()
+
+    content_object =GenericForeignKey('content_type','project_id')
+    
+    def __str__(self):
+        return self.name        

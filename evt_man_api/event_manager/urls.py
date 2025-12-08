@@ -20,5 +20,9 @@ urlpatterns = [
     path('events/<int:event_id>/rsvp/', views.RSVPViewSet.as_view({'post': 'create'}), name='event-rsvp'),
     path('events/<int:event_id>/rsvp/<int:user_id>/', views.RSVPViewSet.as_view({'patch': 'partial_update'}), name='update-rsvp'),
     path('events/<int:event_id>/reviews/', views.ReviewViewSet.as_view({'get': 'list', 'post': 'create'}), name='event-reviews'),
-
+    path('blog/',views.BlogListView.as_view(),name='blog'),
+    path('blog/<int:pk>/',views.BlogListView.as_view(),name='blog_detail'),
+    path('blog_list/',views.BlogListView.as_view(),name='blog_list'),
+    path('blog_detail/<int:pk>/',views.BlogDetailsView.as_view(),name='blog_detail'),
+    path('blog_create/',views.BlogCreateView.as_view(),name='blog_create'),
 ]

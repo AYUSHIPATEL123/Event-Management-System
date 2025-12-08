@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render ,redirect
 from .serializers import RegisterSerializer, LoginSerializer,EventSerializer,ReviewSerializer,RSVPSerializer
 from rest_framework.views import APIView
 from rest_framework import viewsets
@@ -7,7 +7,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate
 from rest_framework.response import Response
 from rest_framework import status
-from .models import UserProfile, Event, Review, RSVP
+from .models import UserProfile, Event, Review, RSVP,blog
 from .permissions import IsOwner, IsPublicEvent
 
 # Create your views here.
@@ -101,4 +101,77 @@ class RSVPViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)   
+        
+from django.views.generic import ListView , CreateView , UpdateView, DeleteView ,DetailView
+from django.urls import reverse_lazy
+# class BlogListView(ListView):
+#     model = blog
+#     template_name = 'blog.html'
+#     success_url = reverse_lazy('blog_list')
+#     feilds = '__all__'
+
+# class BlogCreateView(CreateView):
+#     model = blog
+#     template_name = 'blog_create.html'
+#     fields = ['title', 'description']
+#     success_url = reverse_lazy('blog_create')
+
+from django.views import View
+
+class BlogListView(View):
+    def get(self,request,id=None):
+        if id:
+            data = blog.objects.get(id=id)
+        else:
+            data = blog.objects.all()
+        return render(request, 'blog.html', {'data': data})
+        return render(request,'blog.html',{'data':data})
+    
+    def post(self,request,id=None):
+        method = request.POST.get("_method", "").upper()
+        if method == 'PUT':
+            id = int(request.POST.get('id'))
+            print(id)
+            title = request.POST.get('title')
+            description = request.POST.get('description')
+            blog.objects.filter(id=id).update(title=title,description=description)
+            return redirect('blog')
+        elif method =='PATCH':
+            id = int(request.POST.get('id'))
+            feilds={}
+            if request.POST.get('title'):
+                title = request.POST.get('title')
+                feilds['title'] = title
+            if request.POST.get('description'):
+                description = request.POST.get('description')
+                feilds['description'] = description
+            blog.objects.filter(id=id).update(**feilds)
+            return redirect('blog')
+        elif method == 'DELETE':
+            id = int(request.POST.get('id'))
+            blog.objects.filter(id=id).delete()
+            return redirect('blog')
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        blog.objects.create(title=title,description=description)
+        return redirect('blog')
+        
+
+from django.views.generic import ListView , UpdateView ,DeleteView , DetailView
+
+class BlogListView(ListView):
+    model = blog
+    template_name = 'blog_list.html'
+    context_object_name = 'blog_list'
+
+class BlogDetailsView(DetailView):
+    model = blog
+    template_name = 'blog_detail.html'
+    context_object_name = 'data'
+
+class BlogCreateView(CreateView):
+    model = blog
+    template_name = 'blog_post.html'
+    fields = ['title', 'description']
+    success_url = reverse_lazy('blog_list')
         

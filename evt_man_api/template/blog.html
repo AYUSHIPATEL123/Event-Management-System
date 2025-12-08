@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block  title %}
+blog list
+{% endblock  %}
+{% block content %}
+
+data:  {{data}}
+
+
+<form action="{% url 'blog_list' %}" method="post">
+    {% csrf_token %}
+    
+    
+    <input type="hidden" name="_method" id="method-field" value="POST">
+
+    <label>ID</label>
+    <input type="text" name="id">
+
+    <label>Title</label>
+    <input type="text" name="title">
+
+    <label>Description</label>
+    <input type="text" name="description">
+
+    <button type="submit" onclick = "setMethod('CREATE')">create</button>
+    <button type="submit" onclick = "setMethod('PUT')">update</button>
+    <button type="submit" onclick = "setMethod('PATCH')">patch</button>
+    <button type="submit" onclick = "setMethod('DELETE')">delete</button>
+</form>
+
+<script>
+function setMethod(method) {
+    document.getElementById('method-field').value = method;
+}
+</script>
+
+{% endblock  %}
