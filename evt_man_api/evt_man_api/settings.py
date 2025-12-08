@@ -97,8 +97,8 @@ DATABASES = {
         # 'NAME': BASE_DIR / 'db.sqlite3',
             'ENGINE'  : 'django.db.backends.mysql', # <-- UPDATED line 
             'NAME'    : 'event_manager',                 # <-- UPDATED line 
-            'USER'    : 'root',                     # <-- UPDATED line
-            'PASSWORD': 'root',              # <-- UPDATED line
+            'USER'    : 'yourname',                     # <-- UPDATED line
+            'PASSWORD': 'yourpassword',              # <-- UPDATED line
             'HOST'    : 'localhost',                # <-- UPDATED line
             'PORT'    : '3306',
     
