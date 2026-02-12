@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import UserProfile, Event, RSVP, Review, Post, blog, comment
+from .models import UserProfile, Event, RSVP, Review, Post, blog, comment ,Topping, Pizza, Souse , SpecialPizza
 # Register your models here.
 
 class UserprofileAdmin(admin.ModelAdmin):
@@ -28,3 +28,17 @@ class blogAdmin(admin.ModelAdmin):
     list_display = ('id','title','description','created_at')
 admin.site.register(blog,blogAdmin)
 admin.site.register(comment)
+
+
+class PizzaAdmin(admin.ModelAdmin):
+    list_display = ('id','name')
+# admin.site.register(Pizza,PizzaAdmin)
+admin.site.register(Topping)
+class SouseAdmin(admin.ModelAdmin):
+    list_display = ('id','name')
+admin.site.register(Souse,SouseAdmin)
+
+class SpecialPizzaAdmin(admin.ModelAdmin):
+    list_display = ('id','name')
+
+admin.site.register(SpecialPizza,SpecialPizzaAdmin)

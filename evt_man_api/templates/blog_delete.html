@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}
+blog list
+{% endblock  %}
+{% block content %}
+ <form action="{% url 'blog_delete' blog.id %}" method="post">
+    {% csrf_token %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <button type="submit">delete</button>
+</form>
+{% endblock  %}

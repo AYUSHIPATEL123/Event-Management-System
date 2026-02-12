@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
-    'event_manager',
+    # 'event_manager',
+    'event_manager.apps.EventManagerConfig',
 ]
 
 REST_FRAMEWORK = {
@@ -47,6 +48,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
 }
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -66,6 +68,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'event_manager.midlewares.ModelMiddleWare',
+    'event_manager.midlewares.Model2MiddleWare'
 ]
 
 ROOT_URLCONF = 'evt_man_api.urls'
@@ -73,7 +77,7 @@ ROOT_URLCONF = 'evt_man_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['template'],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -97,12 +101,22 @@ DATABASES = {
         # 'NAME': BASE_DIR / 'db.sqlite3',
             'ENGINE'  : 'django.db.backends.mysql', # <-- UPDATED line 
             'NAME'    : 'event_manager',                 # <-- UPDATED line 
-            'USER'    : 'yourname',                     # <-- UPDATED line
-            'PASSWORD': 'yourpassword',              # <-- UPDATED line
+            'USER'    : 'root',                     # <-- UPDATED line
+            'PASSWORD': 'root',              # <-- UPDATED line
             'HOST'    : 'localhost',                # <-- UPDATED line
             'PORT'    : '3306',
     
+},
+'backup':{
+            'NAME': BASE_DIR / 'db.sqlite3',
+            'ENGINE'  : 'django.db.backends.mysql', # <-- UPDATED line 
+            'NAME'    : 'event_manager_backup',                 # <-- UPDATED line 
+            'USER'    : 'root',                     # <-- UPDATED line
+            'PASSWORD': 'root',              # <-- UPDATED line
+            'HOST'    : 'localhost',                # <-- UPDATED line
+            'PORT'    : '3306',
 }
+
 }
 
 # Password validation

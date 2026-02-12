@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}
+blog list
+{% endblock %}
+{% block content %}
+ <form action="{% url 'blog_update' blog.id %}" method="post">
+    {% csrf_token %}
+    <label>Title</label>
+    <input type="text" name="title">
+    <label>Description</label>
+    <input type="text" name="description">
+    <button type="submit">update</button>
+</form>
+{% endblock  %}

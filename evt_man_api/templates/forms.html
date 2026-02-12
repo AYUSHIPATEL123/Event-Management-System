@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}
+forms
+{% endblock  %}
+{% block content %}
+<br>
+<br>
+<br>
+<form action="{% url 'user' %}" method="post">
+{% csrf_token %}
+{% comment %} {{ form }} {% endcomment %}
+{% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.error }}
+        {{ field.label_tag }} {{ field.field.max_length }} {{field.help_text}}
+        {{ field.use_fieldset }}
+        {{field}}
+    </div>
+{% endfor %}
+<button type="submit">submit</button>
+</form>
+{% endblock  %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}
+pizza
+{% endblock  %}
+{% block content %}
+<br>
+<br>
+{% comment %} {% for p  in pizza %}
+name : {{ p }}  {% endcomment %}
+{% comment %} toppings: {{ p.toppings }} {% endcomment %}
+<br>
+<br>
+{% comment %} {% endfor %}  {% endcomment %}
+{{pizza}}
+<br>
+<br>
+<br>
+<br>
+{% comment %} {% for key,value in iters.items()  %}
+iter : {{ key }} = {{ value }}
+<br>
+{% endfor %} {% endcomment %}
+{% endblock  %}

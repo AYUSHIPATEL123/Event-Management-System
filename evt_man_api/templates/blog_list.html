@@ -3,7 +3,8 @@
 blog list
 {% endblock  %}
 {% block content %}
-{% for b in blog_list %}
+{% comment %} {% for b in blog_list %}
 blog : {{b}} 
-{% endfor %}
+{% endfor %}  {% endcomment %}
+{{blog_list}}
 {% endblock  %}

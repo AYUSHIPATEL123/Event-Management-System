@@ -3,5 +3,9 @@
 blog list
 {% endblock  %}
 {% block content %}
-blog : {{data}} 
+blog : {{blog_list}}
+<br> 
+title : {{blog_list.title}}
+<br>
+description : {{blog_list.description}}
 {% endblock  %}
