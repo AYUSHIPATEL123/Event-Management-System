@@ -126,7 +126,7 @@ class BlogListView(View):
         else:
             data = blog.objects.all()
         return render(request, 'blog.html', {'data': data})
-        return render(request,'blog.html',{'data':data})
+        
     
     def post(self,request,id=None):
         method = request.POST.get("_method", "").upper()
